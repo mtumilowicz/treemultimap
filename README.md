@@ -39,8 +39,8 @@ equals comparisons. Use caution if mutable objects are used as keys or values in
     String message;
     LocalDateTime dateTime;
     ```
-* `CustomerEventPublisher` publishes `CustomerEvent` using guava's EventBus
-* `CustomerEventsSortedMap` listens to published `CustomerEvent`, and add them to TreeMultimap
+* `CustomerEventPublisher` publishes `CustomerEvent` using guava's `EventBus`
+* `CustomerEventsSortedMap` listens to published `CustomerEvent`, and add them to `TreeMultimap`
    * defining multimap (sorted by dateTime from `CustomerEventDetails`):
         ```
         TreeMultimap<Integer, CustomerEventDetails> customerEvents =
