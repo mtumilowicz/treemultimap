@@ -165,4 +165,27 @@ class CustomerEventsSortedMapTest extends Specification {
         customerEventsSortedMap.getDetailsFor(2).size() == 1
         customerEventsSortedMap.getDetailsFor(2)[0] == eventDetails2
     }
+    
+    def "clear - empty"() {
+        given:
+        def eventDetails = CustomerEventDetails.builder()
+                .message("message")
+                .dateTime(LocalDateTime.of(2010, 10, 10, 10, 10))
+                .build()
+
+        and:
+        def event = CustomerEvent.builder()
+                .customerId(1)
+                .details(eventDetails)
+                .build()
+
+        and:
+        customerEventsSortedMap.add(event)
+        
+        when:
+        customerEventsSortedMap.clear()
+
+        then:
+        customerEventsSortedMap.getDetailsFor(1)isEmpty()
+    }
 }

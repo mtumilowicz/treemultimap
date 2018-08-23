@@ -20,5 +20,6 @@ repositories {
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
     compile "org.codehaus.groovy:groovy-all:2.4.15"
+    compile group: 'cglib', name: 'cglib-nodep', version: '3.2.7'
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
 }
