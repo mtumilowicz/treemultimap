@@ -12,6 +12,7 @@ import java.time.LocalDateTime
 /**
  * Created by mtumilowicz on 2018-08-23.
  */
+@SuppressWarnings("UnstableApiUsage")
 class PublisherIntegrationTest extends Specification {
     def "integration"() {
         given:

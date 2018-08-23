@@ -6,6 +6,7 @@ import infrastructure.CustomerEventsSortedMap;
 /**
  * Created by mtumilowicz on 2018-08-23.
  */
+@SuppressWarnings("UnstableApiUsage")
 public final class BusFactory {
     public static EventBus customerEventsSortedMapBus(CustomerEventsSortedMap map) {
         EventBus bus = new EventBus();

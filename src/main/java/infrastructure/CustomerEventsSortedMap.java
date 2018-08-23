@@ -17,6 +17,7 @@ import static java.util.Objects.nonNull;
 /**
  * Created by mtumilowicz on 2018-08-16.
  */
+@SuppressWarnings("UnstableApiUsage")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public final class CustomerEventsSortedMap {
     TreeMultimap<Integer, CustomerEventDetails> customerEvents =
@@ -27,13 +28,13 @@ public final class CustomerEventsSortedMap {
     }
 
     @Subscribe
-    private void add(@NonNull CustomerEvent event) {
+    void add(@NonNull CustomerEvent event) {
         Preconditions.checkArgument(nonNull(event.getDetails()));
         Preconditions.checkArgument(nonNull(event.getDetails().getDateTime()));
 
         customerEvents.put(event.getCustomerId(), event.getDetails());
     }
-    
+
     public void clear() {
         customerEvents.clear();
     }

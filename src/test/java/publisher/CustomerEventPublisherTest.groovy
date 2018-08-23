@@ -7,6 +7,7 @@ import spock.lang.Specification
 /**
  * Created by mtumilowicz on 2018-08-23.
  */
+@SuppressWarnings("UnstableApiUsage")
 class CustomerEventPublisherTest extends Specification {
     
     def eventBus = Mock(EventBus)
