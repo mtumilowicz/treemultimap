@@ -17,16 +17,16 @@ key or value objects already present in the multimap change in a manner that aff
 equals comparisons. Use caution if mutable objects are used as keys or values in a SetMultimap.
 
 # manual
-## build.gradle
-```
-compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
-```
+* build.gradle
+    ```
+    compile group: 'com.google.guava', name: 'guava', version: '25.1-jre'
+    ```
 
-## TreeMultimap
-```
-TreeMultimap<X, Y> customerEvents =
+* TreeMultimap
+    ```
+    TreeMultimap<X, Y> customerEvents =
             TreeMultimap.create(keyComparator, valueComparator);
-```
+    ```
 
 # project description
 * `CustomerEvent` - events that are published:
