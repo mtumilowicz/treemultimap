@@ -1,3 +1,5 @@
+package model;
+
 import lombok.Builder;
 import lombok.Value;
 
@@ -6,7 +8,7 @@ import lombok.Value;
  */
 @Value
 @Builder
-class CustomerEvent {
+public class CustomerEvent {
     int customerId;
     CustomerEventDetails details;
 }

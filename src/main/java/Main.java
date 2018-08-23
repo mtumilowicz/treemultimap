@@ -1,3 +1,8 @@
+import infrastructure.CustomerEventsSortedMap;
+import model.CustomerEvent;
+import model.CustomerEventDetails;
+import publisher.CustomerEventPublisher;
+
 import java.time.LocalDateTime;
 
 /**
