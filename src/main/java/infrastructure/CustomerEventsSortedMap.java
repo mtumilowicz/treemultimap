@@ -33,4 +33,8 @@ public final class CustomerEventsSortedMap {
 
         customerEvents.put(event.getCustomerId(), event.getDetails());
     }
+    
+    public static void clear() {
+        customerEvents.clear();
+    }
 }

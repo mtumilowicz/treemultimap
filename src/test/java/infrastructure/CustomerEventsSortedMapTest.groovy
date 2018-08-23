@@ -11,6 +11,11 @@ import java.time.LocalDateTime
  * Created by mtumilowicz on 2018-08-23.
  */
 class CustomerEventsSortedMapTest extends Specification {
+
+    def cleanup() {
+        CustomerEventsSortedMap.clear()
+    }
+    
     def "test getDetailsFor, null set"() {
         expect:
         CustomerEventsSortedMap.getDetailsFor(1).isEmpty()
@@ -111,5 +116,55 @@ class CustomerEventsSortedMapTest extends Specification {
         CustomerEventsSortedMap.getDetailsFor(1)[0] == eventDetails2
         CustomerEventsSortedMap.getDetailsFor(1)[1] == eventDetails1
         CustomerEventsSortedMap.getDetailsFor(1)[2] == eventDetails3
+    }
+
+    def "test getDetailsFor, fully packed multiple data, multiple customerId - order"() {
+        given:
+        def eventDetails1 = CustomerEventDetails.builder()
+                .message("message")
+                .dateTime(LocalDateTime.of(2010, 10, 10, 10, 10))
+                .build()
+
+        and:
+        def event1 = CustomerEvent.builder()
+                .customerId(1)
+                .details(eventDetails1)
+                .build()
+
+        and:
+        def eventDetails2 = CustomerEventDetails.builder()
+                .message("message")
+                .dateTime(LocalDateTime.of(2009, 10, 10, 10, 10))
+                .build()
+
+        and:
+        def event2 = CustomerEvent.builder()
+                .customerId(2)
+                .details(eventDetails2)
+                .build()
+
+        and:
+        def eventDetails3 = CustomerEventDetails.builder()
+                .message("message")
+                .dateTime(LocalDateTime.of(2012, 10, 10, 10, 10))
+                .build()
+
+        and:
+        def event3 = CustomerEvent.builder()
+                .customerId(1)
+                .details(eventDetails3)
+                .build()
+
+        when:
+        CustomerEventsSortedMap.add(event1)
+        CustomerEventsSortedMap.add(event2)
+        CustomerEventsSortedMap.add(event3)
+
+        then:
+        CustomerEventsSortedMap.getDetailsFor(1).size() == 2
+        CustomerEventsSortedMap.getDetailsFor(1)[0] == eventDetails1
+        CustomerEventsSortedMap.getDetailsFor(1)[1] == eventDetails3
+        CustomerEventsSortedMap.getDetailsFor(2).size() == 1
+        CustomerEventsSortedMap.getDetailsFor(2)[0] == eventDetails2
     }
 }
