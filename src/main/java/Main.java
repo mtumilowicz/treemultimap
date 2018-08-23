@@ -1,3 +1,4 @@
+import bus.BusFactory;
 import infrastructure.CustomerEventsSortedMap;
 import model.CustomerEvent;
 import model.CustomerEventDetails;
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
  */
 public class Main {
     public static void main(String[] args) {
-        CustomerEventPublisher publisher = new CustomerEventPublisher();
+        CustomerEventsSortedMap customerEventsSortedMap = new CustomerEventsSortedMap();
+        CustomerEventPublisher publisher = new CustomerEventPublisher(BusFactory.getBus(customerEventsSortedMap));
 
         publisher.publish(CustomerEvent.builder()
                 .customerId(1)
@@ -19,6 +21,6 @@ public class Main {
                         .dateTime(LocalDateTime.parse("2018-10-10T10:10"))
                         .build()).build());
 
-        System.out.println(CustomerEventsSortedMap.getDetailsFor(1));
+        System.out.println(customerEventsSortedMap.getDetailsFor(1));
     }
 }

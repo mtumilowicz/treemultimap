@@ -11,19 +11,17 @@ import java.time.LocalDateTime
  * Created by mtumilowicz on 2018-08-23.
  */
 class CustomerEventsSortedMapTest extends Specification {
-
-    def cleanup() {
-        CustomerEventsSortedMap.clear()
-    }
+    
+    CustomerEventsSortedMap customerEventsSortedMap = new CustomerEventsSortedMap()
     
     def "test getDetailsFor, null set"() {
         expect:
-        CustomerEventsSortedMap.getDetailsFor(1).isEmpty()
+        customerEventsSortedMap.getDetailsFor(1).isEmpty()
     }
 
     def "test getDetailsFor, CustomerEvent.details == null"() {
         when:
-        CustomerEventsSortedMap.add(CustomerEvent.builder().customerId(1).build())
+        customerEventsSortedMap.add(CustomerEvent.builder().customerId(1).build())
 
         then:
         thrown(IllegalArgumentException)
@@ -42,7 +40,7 @@ class CustomerEventsSortedMapTest extends Specification {
                 .build()
 
         when:
-        CustomerEventsSortedMap.add(event)
+        customerEventsSortedMap.add(event)
 
         then:
         thrown(IllegalArgumentException)
@@ -62,11 +60,11 @@ class CustomerEventsSortedMapTest extends Specification {
                 .build()
 
         when:
-        CustomerEventsSortedMap.add(event)
+        customerEventsSortedMap.add(event)
 
         then:
-        CustomerEventsSortedMap.getDetailsFor(1).size() == 1
-        CustomerEventsSortedMap.getDetailsFor(1)[0] == eventDetails
+        customerEventsSortedMap.getDetailsFor(1).size() == 1
+        customerEventsSortedMap.getDetailsFor(1)[0] == eventDetails
     }
 
     def "test getDetailsFor, fully packed multiple data - order"() {
@@ -107,15 +105,15 @@ class CustomerEventsSortedMapTest extends Specification {
                 .build()
 
         when:
-        CustomerEventsSortedMap.add(event1)
-        CustomerEventsSortedMap.add(event2)
-        CustomerEventsSortedMap.add(event3)
+        customerEventsSortedMap.add(event1)
+        customerEventsSortedMap.add(event2)
+        customerEventsSortedMap.add(event3)
 
         then:
-        CustomerEventsSortedMap.getDetailsFor(1).size() == 3
-        CustomerEventsSortedMap.getDetailsFor(1)[0] == eventDetails2
-        CustomerEventsSortedMap.getDetailsFor(1)[1] == eventDetails1
-        CustomerEventsSortedMap.getDetailsFor(1)[2] == eventDetails3
+        customerEventsSortedMap.getDetailsFor(1).size() == 3
+        customerEventsSortedMap.getDetailsFor(1)[0] == eventDetails2
+        customerEventsSortedMap.getDetailsFor(1)[1] == eventDetails1
+        customerEventsSortedMap.getDetailsFor(1)[2] == eventDetails3
     }
 
     def "test getDetailsFor, fully packed multiple data, multiple customerId - order"() {
@@ -156,15 +154,15 @@ class CustomerEventsSortedMapTest extends Specification {
                 .build()
 
         when:
-        CustomerEventsSortedMap.add(event1)
-        CustomerEventsSortedMap.add(event2)
-        CustomerEventsSortedMap.add(event3)
+        customerEventsSortedMap.add(event1)
+        customerEventsSortedMap.add(event2)
+        customerEventsSortedMap.add(event3)
 
         then:
-        CustomerEventsSortedMap.getDetailsFor(1).size() == 2
-        CustomerEventsSortedMap.getDetailsFor(1)[0] == eventDetails1
-        CustomerEventsSortedMap.getDetailsFor(1)[1] == eventDetails3
-        CustomerEventsSortedMap.getDetailsFor(2).size() == 1
-        CustomerEventsSortedMap.getDetailsFor(2)[0] == eventDetails2
+        customerEventsSortedMap.getDetailsFor(1).size() == 2
+        customerEventsSortedMap.getDetailsFor(1)[0] == eventDetails1
+        customerEventsSortedMap.getDetailsFor(1)[1] == eventDetails3
+        customerEventsSortedMap.getDetailsFor(2).size() == 1
+        customerEventsSortedMap.getDetailsFor(2)[0] == eventDetails2
     }
 }
